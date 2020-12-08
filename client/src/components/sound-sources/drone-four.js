@@ -3,7 +3,7 @@ import styled from "styled-components";
 import * as Tone from "tone";
 import { stopStart } from "../../actions";
 import { useSelector, useDispatch } from "react-redux";
-import { getInitValues } from "../../reducers/parameter-reducer";
+import { droneOneVolume } from "../../actions";
 
 const DroneFour = () => {
   const dispatch = useDispatch();
@@ -12,11 +12,11 @@ const DroneFour = () => {
     return state.droneFour;
   });
 
-  console.log(initValues);
+  // console.log(initValues);
 
-  var tremolo = new Tone.Tremolo(1, 0.15).toDestination().start();
+  const channelOne = new Tone.Channel(-1, -0.75).toDestination();
 
-  var vibrato = new Tone.Vibrato(8, 0.05).toDestination();
+  var vibrato = new Tone.Vibrato(0.01, 1).connect(channelOne);
 
   const [osc, setOsc] = useState((osc) => {
     const osc1 = new Tone.Oscillator({ volume: -30 }).connect(vibrato);
@@ -31,6 +31,11 @@ const DroneFour = () => {
   });
 
   osc2.frequency.value = 210.995;
+
+  useEffect(() => {
+    osc.volume.value = initValues.volume || -59;
+    osc2.volume.value = initValues.volume || -59;
+  }, [initValues.volume]);
 
   if (initValues.startStop) {
     osc.start();
@@ -58,23 +63,44 @@ const DroneFour = () => {
     }
   };
 
+  const volume = (event) => {
+    dispatch(
+      droneOneVolume({
+        volume: event.target.value,
+        instrumentTitle: "droneFour",
+      })
+    );
+  };
+
   return (
     <>
       <Wrapper>
         <Button onClick={startStop}>&#9737;</Button>
+        <Input
+          type="range"
+          onChange={volume}
+          value={initValues.volume}
+          min="-60"
+          max="-15"
+          step="0.01"
+        />
       </Wrapper>
     </>
   );
 };
 
 const Wrapper = styled.div`
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  /* border-top: 1px solid white;
+  border-bottom: 1px solid white; */
   /* border-radius: 5px; */
+  height: 90px;
   margin: 30px;
   padding: 10px;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+
+  align-items: center;
+  /* justify-content: space-around; */
 `;
 
 const Button = styled.button`
@@ -100,13 +126,14 @@ const Input = styled.input`
   border-radius: 12px;
   border: none;
   outline: none;
-  width: 60px;
-  transform: rotate(270deg);
+  width: 40px;
+  height: 8px;
+  /* transform: rotate(270deg); */
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     outline: none;
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     border: 1px solid #b5a642;
   }

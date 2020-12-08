@@ -16,39 +16,29 @@ const DroneThree = () => {
   });
 
   const channel = new Tone.Channel(-0.25, -0.75).toDestination();
-  const channelTwo = new Tone.Channel(-0.15, 0.75).toDestination();
+  const channelTwo = new Tone.Channel(-0.15, 1).toDestination();
 
-  const dist = new Tone.Distortion(0.01).connect(channel);
-  const distTwo = new Tone.Distortion(0.01).connect(channelTwo);
-  const autoFilter = new Tone.AutoFilter("1m").connect(distTwo).start();
-  // const filter = new Tone.FeedbackCombFilter(0.01, 0.01).connect(dist);
+  // const dist = new Tone.Distortion(0.01).connect(channel);
+  // const distTwo = new Tone.Distortion(0.01).connect(channelTwo);
 
   const [osc, setOsc] = useState((osc) => {
-    const osc1 = new Tone.Oscillator().connect(dist);
+    const osc1 = new Tone.Oscillator().connect(channel);
     return osc1;
   });
 
   osc.frequency.value = 138.4;
 
   const [osc2, setOsc2] = useState((osc2) => {
-    const oscTwo = new Tone.Oscillator().connect(distTwo);
+    const oscTwo = new Tone.Oscillator().connect(channelTwo);
     return oscTwo;
   });
 
-  osc2.frequency.value = 138.395;
+  osc2.frequency.value = 138.095;
 
   useEffect(() => {
     osc.volume.value = initValues.volume || -59;
     osc2.volume.value = initValues.volume || -59;
-    console.log(initValues);
   }, [initValues.volume]);
-
-  // useEffect(() => {
-  //   channel.pan.value = initValues.panL || 0;
-  //   channelTwo.pan.value = -initValues.panL || 0;
-  //   console.log(channel.pan.value);
-  //   console.log(channelTwo.pan.value);
-  // }, [initValues.panL]);
 
   const start = () => {
     Tone.start();
@@ -108,9 +98,10 @@ const DroneThree = () => {
 };
 
 const Wrapper = styled.div`
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  /* border-top: 1px solid white;
+  border-bottom: 1px solid white; */
   /* border-radius: 5px; */
+  height: 90px;
   margin: 30px;
   padding: 10px;
   display: flex;

@@ -3,10 +3,14 @@ import styled from "styled-components";
 import * as Tone from "tone";
 import { droneOneVolume, droneOneDetune } from "../../actions";
 import { useSelector, useDispatch } from "react-redux";
-import { getInitValues } from "../../reducers/parameter-reducer";
+
+import FlipCard from "./animations/flip";
+
+// import DetuneAnimation from "./animations/detune";
 
 const DroneOne = () => {
   const dispatch = useDispatch();
+  // const [flipped, set] = useState(false);
 
   const initValues = useSelector((state) => {
     return state.droneOne;
@@ -19,7 +23,7 @@ const DroneOne = () => {
 
   useEffect(() => {
     osc.frequency.value = initValues.detune || 277.485;
-    console.log(initValues);
+    // console.log(initValues);
   }, [initValues.detune]);
 
   const [osc2, setOsc2] = useState((osc2) => {
@@ -27,7 +31,7 @@ const DroneOne = () => {
     return oscTwo;
   });
 
-  console.log(osc.frequency.value);
+  // console.log(osc.frequency.value);
 
   osc2.frequency.value = 277.485;
 
@@ -66,41 +70,55 @@ const DroneOne = () => {
   };
 
   return (
-    <>
-      <Wrapper>
-        <Button onClick={start}>&#9737;</Button>
-        <Button onClick={stop}>&#8709;</Button>
-        <InputDiv>
-          <Input
-            type="range"
-            onChange={volume}
-            value={initValues.volume}
-            min="-60"
-            max="-15"
-            step="0.01"
-          />
-          <DetuneInput
-            type="range"
-            onChange={detune}
-            value={initValues.detune}
-            min="277.485"
-            max="279.530"
-            step="0.01"
-          />
-        </InputDiv>
-      </Wrapper>
-    </>
+    <Wrapper>
+      {/* <FlipButton onClick={() => set((state) => !state)}>
+        &#9735;button
+      </FlipButton>
+      <SynthWrapper> */}
+      {/* <FlipCard flipped={flipped}> */}
+      <Button onClick={start}>&#9737;</Button>
+      <Button onClick={stop}>&#8709;</Button>
+      <InputDiv>
+        <Input
+          type="range"
+          onChange={volume}
+          value={initValues.volume}
+          min="-60"
+          max="-15"
+          step="0.01"
+        />
+        <DetuneInput
+          type="range"
+          onChange={detune}
+          value={initValues.detune}
+          min="277.485"
+          max="279.530"
+          step="0.01"
+        />
+      </InputDiv>
+      {/* <DetuneAnimation detuneAmount={initValues.detune} /> */}
+      {/* </FlipCard>
+      </SynthWrapper> */}
+    </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-  /* border-radius: 5px; */
+  /* border-top: 1px solid white;
+  border-bottom: 1px solid white; */
+  /* position: absolute; */
   margin: 30px;
   padding: 10px;
   display: flex;
-  justify-content: space-around;
+  height: 90px;
+  /* justify-content: space-around; */
+`;
+
+// const FlipButton = styled.button`
+// `;
+
+const SynthWrapper = styled.div`
+  display: flex;
 `;
 
 const Button = styled.button`
@@ -115,7 +133,6 @@ const Button = styled.button`
 `;
 
 const InputDiv = styled.div`
-  /* height: 30px; */
   display: flex;
   align-items: center;
 `;

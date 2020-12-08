@@ -4,18 +4,18 @@ import * as Tone from "tone";
 import { stopStart, dronePitch } from "../../actions";
 import { useSelector, useDispatch } from "react-redux";
 
-const DroneFive = () => {
+const DroneSix = () => {
   const dispatch = useDispatch();
 
   const initValues = useSelector((state) => {
-    return state.droneFive;
+    return state.droneSix;
   });
 
-  const channel = new Tone.Channel(-1, -1).toDestination();
-  const tremolo = new Tone.Vibrato(0.5, 1).connect(channel);
+  const channel = new Tone.Channel(-1, 1).toDestination();
+  const reverb = new Tone.Reverb(3).connect(channel);
 
   const [osc, setOsc] = useState((osc) => {
-    const osc1 = new Tone.Oscillator({ volume: -28 }).connect(tremolo);
+    const osc1 = new Tone.Oscillator({ volume: -15 }).connect(reverb);
     return osc1;
   });
 
@@ -35,14 +35,14 @@ const DroneFive = () => {
       dispatch(
         stopStart({
           startStop: true,
-          instrumentTitle: "droneFive",
+          instrumentTitle: "droneSix",
         })
       );
     } else {
       dispatch(
         stopStart({
           startStop: false,
-          instrumentTitle: "droneFive",
+          instrumentTitle: "droneSix",
         })
       );
     }
@@ -52,7 +52,7 @@ const DroneFive = () => {
     dispatch(
       dronePitch({
         pitch: event.target.value,
-        instrumentTitle: "droneFive",
+        instrumentTitle: "droneSix",
       })
     );
   };
@@ -65,7 +65,7 @@ const DroneFive = () => {
           type="range"
           onChange={pitch}
           value={initValues.pitch}
-          min="220"
+          min="130"
           max="440"
           step="0.01"
         />
@@ -108,4 +108,4 @@ const Input = styled.input`
   }
 `;
 
-export default DroneFive;
+export default DroneSix;

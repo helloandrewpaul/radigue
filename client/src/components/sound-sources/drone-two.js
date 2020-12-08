@@ -3,7 +3,6 @@ import styled from "styled-components";
 import * as Tone from "tone";
 import { droneOneVolume, droneOneDetune } from "../../actions";
 import { useSelector, useDispatch } from "react-redux";
-import { getInitValues } from "../../reducers/parameter-reducer";
 
 const DroneTwo = () => {
   const dispatch = useDispatch();
@@ -12,7 +11,7 @@ const DroneTwo = () => {
     return state.droneTwo;
   });
 
-  console.log(initValues);
+  // console.log(initValues);
 
   const [osc, setOsc] = useState((osc) => {
     const osc1 = new Tone.Oscillator().toDestination();
@@ -21,7 +20,7 @@ const DroneTwo = () => {
 
   useEffect(() => {
     osc.frequency.value = initValues.detune || 184.995;
-    console.log(initValues);
+    // console.log(initValues);
   }, [initValues.detune]);
 
   const [osc2, setOsc2] = useState((osc2) => {
@@ -29,7 +28,7 @@ const DroneTwo = () => {
     return oscTwo;
   });
 
-  console.log(osc.frequency.value);
+  // console.log(osc.frequency.value);
 
   osc2.frequency.value = 184.995;
 
@@ -89,6 +88,10 @@ const DroneTwo = () => {
             max="185.995"
             step="0.01"
           />
+          {/* <DetuneWrapper>
+            <DetuneText>p</DetuneText>
+            <DetuneTextTwo>p</DetuneTextTwo>
+          </DetuneWrapper> */}
         </InputDiv>
       </Wrapper>
     </>
@@ -96,12 +99,12 @@ const DroneTwo = () => {
 };
 
 const Wrapper = styled.div`
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-  /* border-radius: 5px; */
+  /* border-top: 1px solid white;
+  border-bottom: 1px solid white; */
   margin: 30px;
   padding: 10px;
   display: flex;
+  height: 90px;
   justify-content: space-around;
 `;
 
@@ -122,6 +125,10 @@ const InputDiv = styled.div`
   align-items: center;
 `;
 
+const DetuneWrapper = styled.div`
+  position: relative;
+`;
+
 const Input = styled.input`
   -webkit-appearance: none;
   background-color: rgb(222, 235, 255, 0.1);
@@ -138,6 +145,16 @@ const Input = styled.input`
     border-radius: 50%;
     border: 1px solid #b5a642;
   }
+`;
+
+const DetuneText = styled.p`
+  position: absolute;
+  right: 0;
+`;
+
+const DetuneTextTwo = styled.p`
+  position: absolute;
+  right: 0;
 `;
 
 const DetuneInput = styled.input`

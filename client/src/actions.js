@@ -10,14 +10,41 @@ export const droneOneDetune = ({ detune, instrumentTitle }) => ({
   instrumentTitle,
 });
 
-export const panAdjust = ({ panL, instrumentTitle }) => ({
-  type: "ADJUST_PAN",
-  panL,
-  instrumentTitle,
-});
-
 export const stopStart = ({ startStop, instrumentTitle }) => ({
   type: "START_STOP",
   startStop,
   instrumentTitle,
+});
+
+export const dronePitch = ({ pitch, instrumentTitle }) => ({
+  type: "ADJUST_PITCH",
+  pitch,
+  instrumentTitle,
+});
+
+export const weatherParams = ({}) => ({
+  type: "WEATHER_PARAMS",
+  droneOne: {
+    volume,
+    detune,
+  },
+  droneTwo: {
+    volume,
+    detune,
+  },
+  droneThree: {
+    volume,
+  },
+  droneFour: {
+    startStop,
+    volume,
+  },
+  droneFive: {
+    startStop,
+    pitch,
+  },
+  droneSix: {
+    startStop,
+    pitch,
+  },
 });

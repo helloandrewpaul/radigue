@@ -9,12 +9,19 @@ const initialState = {
   },
   droneThree: {
     volume: -59,
-    panL: 0,
   },
   droneFour: {
     startStop: false,
+    volume: -59,
   },
-  droneFive: {},
+  droneFive: {
+    startStop: false,
+    pitch: 220,
+  },
+  droneSix: {
+    startStop: false,
+    pitch: 220,
+  },
 };
 
 export default function parameterReducer(state = initialState, action) {
@@ -54,6 +61,21 @@ export default function parameterReducer(state = initialState, action) {
           ...state[action.instrumentTitle],
           startStop: action.startStop,
         },
+      };
+    }
+    case "ADJUST_PITCH": {
+      return {
+        ...state,
+        [action.instrumentTitle]: {
+          ...state[action.instrumentTitle],
+          pitch: action.pitch,
+        },
+      };
+    }
+    case "WEATHER_PARAMS": {
+      return {
+        ...state,
+        //return some other stuff
       };
     }
     default: {
