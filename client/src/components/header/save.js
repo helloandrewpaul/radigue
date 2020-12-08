@@ -7,7 +7,7 @@ const Save = () => {
     return state;
   });
 
-  console.log(initValues);
+  // console.log(initValues);
 
   return (
     <Wrapper>

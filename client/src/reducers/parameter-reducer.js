@@ -73,10 +73,7 @@ export default function parameterReducer(state = initialState, action) {
       };
     }
     case "WEATHER_PARAMS": {
-      return {
-        ...state,
-        //return some other stuff
-      };
+      return action.weatherState;
     }
     default: {
       return { ...state };

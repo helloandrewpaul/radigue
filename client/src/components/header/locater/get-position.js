@@ -10,24 +10,23 @@ const GetPosition = () => {
   const dispatch = useDispatch();
 
   const [currentWeather, setCurrentWeather] = useState([]);
+  const [codeParams, setCodeParams] = useState({});
   const watch = true;
 
   const { latitude, longitude } = usePosition(watch);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (latitude) {
-      fetch(
+      await fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${APIKEY}`
       )
         .then((res) => res.json())
         .then((data) => {
           setCurrentWeather({ main: data.main, code: data.weather });
-          console.log(currentWeather);
+          setCodeParams(data.weather);
         });
     }
   }, [latitude]);
-
-  console.log(currentWeather);
 
   //200-232 = thunderstorm
   //300-321 = drizzle
@@ -35,14 +34,6 @@ const GetPosition = () => {
   //600-622 = snow
   //800-804 = clouds
 
-  const weatherCode = () => {
-    if (currentWeather.code[0].id > 200) {
-      console.log("weather code works");
-    } else {
-      console.log("not working");
-      console.log(currentWeather.code);
-    }
-  };
   //store in an if statement so it runs when currentWeather exists
 
   //   0: {id: 521, main: "Rain", description: "shower rain", icon: "09d"}
@@ -56,16 +47,37 @@ const GetPosition = () => {
   // temp_max: 268.15
   // temp_min: 267.04
 
-  //button onClick=(() => {
-  //do a dispatch that sends a whole assed state object for the synths
-  // })
+  console.log(currentWeather);
+  console.log(codeParams);
 
   const setParameters = () => {
-    console.log("dispatch to store new object of params modified by weather");
     if (currentWeather) {
       dispatch(
         weatherParams({
           //our big initValues object
+          droneOne: {
+            volume: codeParams[0].id * 0.6,
+            detune: currentWeather.temp,
+          },
+          droneTwo: {
+            volume: currentWeather.humidity * 0.5,
+            detune: currentWeather.temp_max,
+          },
+          droneThree: {
+            volume: currentWeather.humidity * 0.3,
+          },
+          droneFour: {
+            startStop: true,
+            volume: -39,
+          },
+          droneFive: {
+            startStop: false,
+            pitch: currentWeather.temp_min,
+          },
+          droneSix: {
+            startStop: false,
+            pitch: currentWeather.temp_min,
+          },
         })
       );
     }

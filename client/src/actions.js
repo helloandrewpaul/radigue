@@ -22,29 +22,7 @@ export const dronePitch = ({ pitch, instrumentTitle }) => ({
   instrumentTitle,
 });
 
-export const weatherParams = ({}) => ({
+export const weatherParams = (weatherState) => ({
   type: "WEATHER_PARAMS",
-  droneOne: {
-    volume,
-    detune,
-  },
-  droneTwo: {
-    volume,
-    detune,
-  },
-  droneThree: {
-    volume,
-  },
-  droneFour: {
-    startStop,
-    volume,
-  },
-  droneFive: {
-    startStop,
-    pitch,
-  },
-  droneSix: {
-    startStop,
-    pitch,
-  },
+  weatherState,
 });
