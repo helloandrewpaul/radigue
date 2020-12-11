@@ -26,3 +26,13 @@ export const weatherParams = (weatherState) => ({
   type: "WEATHER_PARAMS",
   weatherState,
 });
+
+export const storePresets = (presets) => ({
+  type: "STORE_PRESETS",
+  presets,
+});
+
+export const setPreset = (presets) => ({
+  type: "USE_PRESET",
+  presets,
+});

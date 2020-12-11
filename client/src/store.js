@@ -1,7 +1,8 @@
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 import parameterReducer from "./reducers/parameter-reducer";
+import presetReducer from "./reducers/preset-reducer";
 
-const reducer = parameterReducer;
+const reducer = combineReducers({ parameterReducer, presetReducer });
 
 export default function configureStore(initialState) {
   const store = createStore(

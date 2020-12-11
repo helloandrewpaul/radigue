@@ -10,7 +10,7 @@ const DetuneAnimation = (props) => {
   const [animationAmount, setAnimationAmount] = useState();
 
   const initValues = useSelector((state) => {
-    return state.id;
+    return state.parameterReducer.id;
   });
 
   useEffect(() => {

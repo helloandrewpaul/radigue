@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import DroneOne from "./sound-sources/drone-one";
 import DroneTwo from "./sound-sources/drone-two";
@@ -10,10 +9,16 @@ import DroneSix from "./sound-sources/drone-six";
 import Header from "./header/header";
 import GlobalStyle from "./global-styles";
 
+import { UserContext } from "../context/user-context";
+
 //import APIKEY
 //useEffect
 
 const App = () => {
+  const { appUser, signInWithGoogle, handleSignOut, message } = useContext(
+    UserContext
+  );
+
   return (
     <>
       <Wrapper>

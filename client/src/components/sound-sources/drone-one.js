@@ -13,7 +13,7 @@ const DroneOne = () => {
   // const [flipped, set] = useState(false);
 
   const initValues = useSelector((state) => {
-    return state.droneOne;
+    return state.parameterReducer.droneOne;
   });
 
   const [osc, setOsc] = useState((osc) => {

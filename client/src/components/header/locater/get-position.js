@@ -2,22 +2,23 @@ import React, { useEffect, useState } from "react";
 import { usePosition } from "use-position";
 import styled from "styled-components";
 import { weatherParams } from "../../../actions";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { WiLightning } from "react-icons/wi";
 
 const APIKEY = process.env.REACT_APP_APIKEY;
 
 const GetPosition = () => {
   const dispatch = useDispatch();
 
-  const [currentWeather, setCurrentWeather] = useState([]);
-  const [codeParams, setCodeParams] = useState({});
+  const [currentWeather, setCurrentWeather] = useState(null);
+  const [codeParams, setCodeParams] = useState(null);
   const watch = true;
 
   const { latitude, longitude } = usePosition(watch);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (latitude) {
-      await fetch(
+      fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${APIKEY}`
       )
         .then((res) => res.json())
@@ -34,8 +35,6 @@ const GetPosition = () => {
   //600-622 = snow
   //800-804 = clouds
 
-  //store in an if statement so it runs when currentWeather exists
-
   //   0: {id: 521, main: "Rain", description: "shower rain", icon: "09d"}
   // length: 1
   // __proto__: Array(0)
@@ -47,39 +46,43 @@ const GetPosition = () => {
   // temp_max: 268.15
   // temp_min: 267.04
 
-  console.log(currentWeather);
-  console.log(codeParams);
+  // console.log(currentWeather);
+  // console.log(codeParams);
 
   const setParameters = () => {
+    // console.log(currentWeather);
     if (currentWeather) {
       dispatch(
         weatherParams({
-          //our big initValues object
           droneOne: {
-            volume: codeParams[0].id * 0.6,
-            detune: currentWeather.temp,
+            volume: -28,
+            detune: currentWeather.main.temp,
           },
           droneTwo: {
-            volume: currentWeather.humidity * 0.5,
-            detune: currentWeather.temp_max,
+            volume: -20,
+            detune:
+              currentWeather.main.temp_max +
+              currentWeather.main.temp_max * 0.01,
           },
           droneThree: {
-            volume: currentWeather.humidity * 0.3,
+            volume: -20,
           },
           droneFour: {
             startStop: true,
-            volume: -39,
+            volume: -35,
           },
           droneFive: {
-            startStop: false,
-            pitch: currentWeather.temp_min,
+            startStop: true,
+            pitch: currentWeather.main.temp_min,
           },
           droneSix: {
-            startStop: false,
-            pitch: currentWeather.temp_min,
+            startStop: true,
+            pitch: currentWeather.main.temp_max,
           },
         })
       );
+    } else {
+      console.log("loading weather");
     }
   };
 
@@ -90,7 +93,7 @@ const GetPosition = () => {
   );
 };
 
-const Button = styled.button`
+const Button = styled(WiLightning)`
   background: none;
   border: none;
   outline: none;

@@ -75,18 +75,17 @@ export default function parameterReducer(state = initialState, action) {
     case "WEATHER_PARAMS": {
       return action.weatherState;
     }
+    case "USE_PRESET": {
+      return action.presets;
+    }
     default: {
       return { ...state };
     }
   }
 }
 
-// console.log(state);
-
 export const getInitValues = (state) => {
   console.log(state);
   const initValues = Object.values(state);
-  // console.log(initValues);
-
   return initValues;
 };
