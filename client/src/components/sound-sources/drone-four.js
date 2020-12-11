@@ -9,7 +9,7 @@ const DroneFour = () => {
   const dispatch = useDispatch();
 
   const initValues = useSelector((state) => {
-    return state.droneFour;
+    return state.parameterReducer.droneFour;
   });
 
   // console.log(initValues);

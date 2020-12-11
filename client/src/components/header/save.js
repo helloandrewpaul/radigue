@@ -1,44 +1,68 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useContext, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { updateStatus } from "../../actions";
+import { UserContext } from "../../context/user-context";
 
-const Save = () => {
+import ReactTooltip from "react-tooltip";
+
+const Save = (props) => {
+  const { toggle, setToggle } = props;
+  const dispatch = useDispatch();
+  const { appUser } = useContext(UserContext);
+
   const initValues = useSelector((state) => {
-    return state;
+    return state.parameterReducer;
   });
-
-  // console.log(initValues);
 
   return (
     <Wrapper>
-      <Button
-        onClick={(ev) => {
-          ev.preventDefault();
+      {appUser && appUser.email ? (
+        <>
+          <Button
+            onClick={(ev) => {
+              ev.preventDefault();
 
-          fetch("/save", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              initValues,
-            }),
-          })
-            .then((res) => res.json())
-            .then((res) => {
-              console.log(res);
-            });
-        }}
-      >
-        &#10000;
-      </Button>
+              fetch("/save", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  params: initValues,
+                  user: appUser.email,
+                }),
+              })
+                .then((res) => res.json())
+                .then(() => {
+                  setToggle(true);
+                });
+            }}
+            //dispatch a status to the preset reducer to update it so the useeffect in load
+            //reloads
+          >
+            &#10000;
+          </Button>
+        </>
+      ) : (
+        <Wrapper>
+          <AboutText data-tip data-for="savedisabled">
+            &#10000;
+          </AboutText>
+          <ReactTooltip
+            id="savedisabled"
+            effect="solid"
+            backgroundColor="#232426"
+          >
+            <Div>Login to enable saving</Div>
+          </ReactTooltip>
+        </Wrapper>
+      )}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
-  font-family: "Segoe UI Symbol";
-`;
+const Wrapper = styled.div``;
 
 const Button = styled.button`
   background: none;
@@ -50,6 +74,27 @@ const Button = styled.button`
   &:hover {
     color: white;
     cursor: pointer;
+  }
+  &:disabled {
+    color: grey;
+  }
+`;
+
+const Div = styled.div`
+  border-radius: 5px;
+  width: 180px;
+  background: #232426;
+  padding: 10px;
+  -webkit-box-shadow: 0px 0px 2px 3px rgba(0, 0, 0, 0.22);
+  box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.22);
+`;
+
+const AboutText = styled.p`
+  color: grey;
+  font-size: 30px;
+  margin-right: 40px;
+  &:hover {
+    cursor: w-resize;
   }
 `;
 

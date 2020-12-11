@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import GetPosition from "./locater/get-position";
 import About from "./about";
 import Save from "./save";
 import Load from "./load";
+import Login from "./login";
 
 const Header = () => {
+  const [toggle, setToggle] = useState(false);
+
   return (
     <Wrapper>
       <div>
         <IconWrapper>
+          <Login toggle={toggle} setToggle={setToggle} />
+          <Save toggle={toggle} setToggle={setToggle} />
           <About />
-          <Save />
           <GetPosition />
+          <Load toggle={toggle} setToggle={setToggle} />
         </IconWrapper>
-      </div>
-      <div>
-        <Load />
       </div>
     </Wrapper>
   );

@@ -8,7 +8,7 @@ const DroneFive = () => {
   const dispatch = useDispatch();
 
   const initValues = useSelector((state) => {
-    return state.droneFive;
+    return state.parameterReducer.droneFive;
   });
 
   const channel = new Tone.Channel(-1, -1).toDestination();

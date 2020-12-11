@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import * as Tone from "tone";
-import {
-  droneOneVolume,
-  // , panAdjust
-} from "../../actions";
+import { droneOneVolume } from "../../actions";
 import { useSelector, useDispatch } from "react-redux";
-import { getInitValues } from "../../reducers/parameter-reducer";
 
 const DroneThree = () => {
   const dispatch = useDispatch();
 
   const initValues = useSelector((state) => {
-    return state.droneThree;
+    return state.parameterReducer.droneThree;
   });
 
   const channel = new Tone.Channel(-0.25, -0.75).toDestination();
@@ -59,15 +55,6 @@ const DroneThree = () => {
       })
     );
   };
-
-  // const pan = (event) => {
-  //   dispatch(
-  //     panAdjust({
-  //       panL: event.target.value,
-  //       instrumentTitle: "droneThree",
-  //     })
-  //   );
-  // };
 
   return (
     <>
