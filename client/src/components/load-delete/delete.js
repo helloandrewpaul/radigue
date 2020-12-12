@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { RiCloseLine } from "react-icons/ri";
 
 const DeleteButton = (props) => {
   const { _id, toggle, setToggle } = props;
@@ -18,7 +19,17 @@ const DeleteButton = (props) => {
     });
   };
 
-  return <button onClick={deletePreset}>x</button>;
+  return <StyledRiCloseLine onClick={deletePreset}>x</StyledRiCloseLine>;
 };
+
+const StyledRiCloseLine = styled(RiCloseLine)`
+  height: 10px;
+  /* position: absolute; */
+  margin-bottom: 10px;
+  &:hover {
+    color: white;
+    cursor: pointer;
+  }
+`;
 
 export default DeleteButton;

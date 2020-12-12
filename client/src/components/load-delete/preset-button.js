@@ -57,13 +57,22 @@ const PresetButton = (props) => {
 
 const Wrapper = styled.div`
   display: flex;
-  padding-right: 10px;
+  /* padding-right: 10px; */
+  /* position: relative; */
+  height: 40px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledVscSymbolMethod = styled(VscSymbolMethod)`
+  /* position: relative; */
+  /* padding: 10px; */
+  height: 30px;
   &:hover {
     color: white;
     cursor: pointer;
   }
 `;
-
-const StyledVscSymbolMethod = styled(VscSymbolMethod)``;
 
 export default PresetButton;
