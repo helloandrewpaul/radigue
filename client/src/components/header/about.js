@@ -14,7 +14,12 @@ const About = () => {
         ?
       </AboutText>
       <ReactTooltip id="about" effect="solid" backgroundColor="#232426">
-        <Div>This is the about section!</Div>
+        <Div>
+          Radigue is sine waves phasing and beating, harmony or dissonance.
+          Headphones are not required but recommended. The pencil will save your
+          panel settings, the bolts will set parameters according to the weather
+          of your geographic location. Built using React and Tone.js.
+        </Div>
       </ReactTooltip>
     </Wrapper>
   );
@@ -27,8 +32,8 @@ const Wrapper = styled.div`
 
 const Div = styled.div`
   border-radius: 5px;
-  width: 180px;
-  /* color: white; */
+  width: 400px;
+  text-align: center;
   background: #232426;
   padding: 10px;
   -webkit-box-shadow: 0px 0px 2px 3px rgba(0, 0, 0, 0.22);

@@ -11,15 +11,15 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <div>
-        <IconWrapper>
-          <Login toggle={toggle} setToggle={setToggle} />
-          <Save toggle={toggle} setToggle={setToggle} />
-          <About />
-          <GetPosition />
-          <Load toggle={toggle} setToggle={setToggle} />
-        </IconWrapper>
-      </div>
+      <IconWrapper>
+        <Login toggle={toggle} setToggle={setToggle} />
+        <Save toggle={toggle} setToggle={setToggle} />
+        <About />
+        <GetPosition />
+      </IconWrapper>
+      <LoadWrapper>
+        <Load toggle={toggle} setToggle={setToggle} />
+      </LoadWrapper>
     </Wrapper>
   );
 };
@@ -31,6 +31,13 @@ const Wrapper = styled.div`
   top: 0;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
+`;
+
+const LoadWrapper = styled.div`
+  height: 50px;
+  width: 300px;
+  display: flex;
   align-items: center;
 `;
 

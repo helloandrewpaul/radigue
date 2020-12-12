@@ -39,7 +39,6 @@ const savePreset = async (req, res) => {
     await client.connect();
     const db = client.db("radiguedb");
     const results = await db.collection("parameterdb").insertOne(req.body);
-
     if (results) {
       res.status(201).json({ status: 201, message: "Successfully added" });
       client.close();
