@@ -3,10 +3,6 @@ import styled from "styled-components";
 import ReactTooltip from "react-tooltip";
 
 const About = () => {
-  const openAbout = () => {
-    console.log("opened");
-  };
-
   return (
     <Wrapper>
       {/* <Button onClick={openAbout}>?</Button> */}

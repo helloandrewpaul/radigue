@@ -63,22 +63,6 @@ const Save = (props) => {
 
 const Wrapper = styled.div``;
 
-// const Button = styled.button`
-//   background: none;
-//   border: none;
-//   outline: none;
-//   color: #b5a642;
-//   font-size: 30px;
-//   margin-right: 40px;
-//   &:hover {
-//     color: white;
-//     cursor: pointer;
-//   }
-//   &:disabled {
-//     color: grey;
-//   }
-// `;
-
 const StyledImPencil2 = styled(ImPencil2)`
   background: none;
   border: none;

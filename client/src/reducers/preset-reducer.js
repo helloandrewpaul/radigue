@@ -15,7 +15,7 @@ export default function presetReducer(state = initialState, action) {
 }
 
 export const getPresetValues = (state) => {
-  console.log(state);
+  // console.log(state);
   const presetValues = Object.keys(state);
   return presetValues;
 };
