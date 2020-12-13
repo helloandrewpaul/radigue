@@ -28,6 +28,7 @@ const About = () => {
 const Wrapper = styled.div`
   font-family: "Segoe UI Symbol";
   background: #232426;
+  padding-left: 40px;
 `;
 
 const Div = styled.div`
@@ -44,6 +45,7 @@ const AboutText = styled.p`
   color: #b5a642;
   font-size: 30px;
   margin-right: 40px;
+  transform: translateY(-3px);
   &:hover {
     color: white;
     cursor: pointer;
