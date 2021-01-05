@@ -85,7 +85,7 @@ export default function parameterReducer(state = initialState, action) {
 }
 
 export const getInitValues = (state) => {
-  console.log(state);
+  // console.log(state);
   const initValues = Object.values(state);
   return initValues;
 };

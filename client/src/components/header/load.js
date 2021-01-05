@@ -53,12 +53,13 @@ const Load = (props) => {
 const Wrapper = styled.div`
   display: flex;
   padding-left: 30px;
-  height: 40px;
+  height: 60px;
   width: 600px;
+  padding: 10px;
   flex-wrap: wrap;
   overflow: auto;
   -webkit-box-shadow: 0px 0px 2px 3px rgba(0, 0, 0, 0.22);
-  box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.22);
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.22);
   ::-webkit-scrollbar {
     width: 10px;
   }

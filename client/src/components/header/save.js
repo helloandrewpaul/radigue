@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { updateStatus } from "../../actions";
 import { UserContext } from "../../context/user-context";
+import { ImPencil2 } from "react-icons/im";
 
 import ReactTooltip from "react-tooltip";
 
@@ -19,7 +20,7 @@ const Save = (props) => {
     <Wrapper>
       {appUser && appUser.email ? (
         <>
-          <Button
+          <StyledImPencil2
             onClick={(ev) => {
               ev.preventDefault();
 
@@ -40,14 +41,12 @@ const Save = (props) => {
             }}
             //dispatch a status to the preset reducer to update it so the useeffect in load
             //reloads
-          >
-            &#10000;
-          </Button>
+          />
         </>
       ) : (
         <Wrapper>
           <AboutText data-tip data-for="savedisabled">
-            &#10000;
+            <StyledImPencil2grey />
           </AboutText>
           <ReactTooltip
             id="savedisabled"
@@ -64,20 +63,25 @@ const Save = (props) => {
 
 const Wrapper = styled.div``;
 
-const Button = styled.button`
+const StyledImPencil2 = styled(ImPencil2)`
   background: none;
   border: none;
   outline: none;
   color: #b5a642;
-  font-size: 30px;
+  font-size: 20px;
   margin-right: 40px;
   &:hover {
     color: white;
     cursor: pointer;
   }
-  &:disabled {
-    color: grey;
-  }
+`;
+
+const StyledImPencil2grey = styled(ImPencil2)`
+  color: grey;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 20px;
 `;
 
 const Div = styled.div`
